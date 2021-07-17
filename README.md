@@ -45,9 +45,9 @@ docker run -it --volume ${my_apps_tgz_dir}:/src ${my_image_name} splunk-appinspe
 
 echo "Failures="`awk -F ":" '/failure/ {gsub(" ","");print $2}' ${myoutput}`
 echo "Errors="`awk -F ":" '/error/ {gsub(" ","");print $2}' ${myoutput}`
+echo "Failure Lines=\n"`grep '[  F' ${myoutput}`
 
-
-# Pack the app to ${my_apps_tgz_dir}
+# Pack the app to current directory
 app_name="my_app"
 app_build_dir="/tmp"
 rm ${app_name}.tgz && tar -C ${app_build_dir}/${app_name} -czf ${app_name}.tgz .
